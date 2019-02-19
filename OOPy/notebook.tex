@@ -1,0 +1,625 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{OOPy-Relations}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Object Oriented Modeling:
+Relations}\label{object-oriented-modeling-relations}
+
+In this note we focus on classes and relations: How various objects in
+an application can collaborate with each other?
+
+    \subsection{Review:}\label{review}
+
+We know: - A class is a descriptor for a set of entities that share the
+same attributes, operations, relations and behaviour. It does not have a
+life-time. It does not exist in run-time. - An object is an instance of
+a class with identity, state and behaviour. It has a life-time. It
+consumes memory at run-time.
+
+    \subsection{Motivations}\label{motivations}
+
+Examples:
+
+\begin{itemize}
+\item
+  In a larger applications we may have a group of objects that are
+  \emph{inherently} sharing attributes and behaviours: in a library some
+  people are working as employees and authors are writing books. But,
+  both employees and authors are persons: they have shared properties.
+  How do we model this?
+\item
+  An author writes a book. A library lends books. The objects involved
+  in these type of scenarios are not sharing / \emph{inheriting}
+  properties, but they are \emph{collaborating}. How one can specify the
+  collaborations?
+\end{itemize}
+
+    \subsection{Class Diagram}\label{class-diagram}
+
+A class diagram of a (software) system specifies: - Static model of
+(software) units collaborating to each other. - Units are represented as
+\emph{Classes}, - Collaborations are denoted statically as
+\emph{Relations} between classes.
+
+Here we explain three fundamental relations between classes. We will try
+to present how various relations can be implemented in Python.
+
+    \subsubsection{Association}\label{association}
+
+\textbf{Definition}: An association describes \emph{lifelong}
+connections / collaborations among objects. Association between two
+classes means: An object from one class, during its lifetime, has
+reference to object(s) of another class.
+
+\textbf{Example}: Each person has one or more address(es).
+
+\textbf{UML}: The picture here shows how an association between two
+classes can be represented in UML. It specifies: an object from Person
+has \emph{exactly one} address which is defined as \emph{private}. The
+number is called the carinality of the relation, the name specifies the
+variable name to be defined as an attribute of Person and '-' specifies
+the visibility (private or public) of the address in Person.
+
+To specify an association one can define \emph{navigability} (the
+direction of association), \emph{multiplicity} (cardinality of objects
+involved in the relation), \emph{visibility} (level of accessibility),
+\emph{role} (how associated object is involved in the relation).
+
+In the model above, navigability is from Person to the Address,
+visibility is private, multiplicity is exactly one for the address and
+the role of Address is defined as address.
+
+As it is defined, an association represents a reference. But, how an
+object from a Person has access to objects from Address? Check the code
+below.
+
+\textbf{Programming}: In programming, an association is implemented as
+an attribute. A Person (an object instantiated from a Person) has access
+to an Address (an object instantiated from an Address). The best way is
+to define an attribute for the Person of type Address. Then any object
+of Person can access to its address whenever it is needed.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{k}{class} \PY{n+nc}{Person}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{ad}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} let\PYZsq{}s initialize some attributes, including the address}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name} \PY{o}{=} \PY{n}{fn}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name} \PY{o}{=} \PY{n}{ln}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}address} \PY{o}{=} \PY{n}{ad}    \PY{c+c1}{\PYZsh{} as it is specified in the model, address is private}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}      
+                 \PY{c+c1}{\PYZsh{} check: how the address object is used}
+                 \PY{n}{res} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Name ]:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}address}\PY{o}{.}\PY{n}{getAddress}\PY{p}{(}\PY{p}{)}
+                 \PY{k}{return} \PY{n}{res}
+         
+         \PY{k}{class} \PY{n+nc}{Address}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{cnt}\PY{p}{,}\PY{n}{cty}\PY{p}{,}\PY{n}{st}\PY{p}{,}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{country} \PY{o}{=} \PY{n}{cnt}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{city} \PY{o}{=} \PY{n}{cty}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{street} \PY{o}{=} \PY{n}{st}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{number} \PY{o}{=} \PY{n}{num}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}sep} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ , }\PY{l+s+s1}{\PYZsq{}}
+         
+             \PY{k}{def} \PY{n+nf}{getAddress}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Address ]:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{country}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}sep}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{city}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}sep}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{street}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{number}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{pa} \PY{o}{=} \PY{n}{Address}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{The Netherlands}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rotterdam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rembrandt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}
+             \PY{n}{p} \PY{o}{=} \PY{n}{Person}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dianna}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{King}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{pa}\PY{p}{)}  \PY{c+c1}{\PYZsh{} check: how we pass the address}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{p}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ Name ]:Dianna King[ Address ]:The Netherlands , Rotterdam , Rembrandt4
+
+    \end{Verbatim}
+
+    \textbf{Exercise}: Intrepret the model below. It specifies that each
+person can have one or more addresses. How would you implement it?
+Update your code to meet the UML specification. What are the cardinality
+and visibility in this model?
+
+    \subsubsection{Dependency}\label{dependency}
+
+\textbf{Definition of Dependency}: Class A has \emph{dependecy} relation
+with B when an object from A has access to an instance of B
+\emph{temporarily} during its life-time.
+
+\textbf{Example}: In a board game, a player throws a dice to move the
+pawns. The player does not need to keep the reference to the dice during
+the whole play. The player gets the dice, thorws the dice, uses the
+result and release the access to the dice.
+
+\textbf{UML}: The digram below shows how one can model the depenedency
+relation between a player and a dice. Note that the rest of the model
+and application is not presented here.
+
+\textbf{Programming}: The code below presents how one can implement the
+concept.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{k+kn}{from} \PY{n+nn}{random} \PY{k}{import} \PY{o}{*}
+         
+         \PY{k}{class} \PY{n+nc}{Dice}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{s}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} default is a normal dice}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sides} \PY{o}{=} \PY{n}{s}         \PY{c+c1}{\PYZsh{} max of sides}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sides}\PY{p}{)}  \PY{c+c1}{\PYZsh{} the state of the dice, a random number}
+         
+             \PY{k}{def} \PY{n+nf}{throw}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state} \PY{o}{=} \PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{sides}\PY{p}{)}
+                 \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{state}
+         
+         \PY{k}{class} \PY{n+nc}{Player}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{n}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{n}{n}
+         
+             \PY{k}{def} \PY{n+nf}{play}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{d}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} check: the scope of using the dice is this method}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{d}\PY{o}{.}\PY{n}{throw}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{move}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} rest of the code can be here ...}
+         
+             \PY{k}{def} \PY{n+nf}{move}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{n}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} check: this method does not depend on Dice}
+                 \PY{c+c1}{\PYZsh{} move your pawns here ...}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{name}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ moved pawns }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{n}\PY{p}{)}
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+             \PY{n}{d} \PY{o}{=} \PY{n}{Dice}\PY{p}{(}\PY{p}{)}  \PY{c+c1}{\PYZsh{} let\PYZsq{}s create a normal dice}
+             \PY{n}{p} \PY{o}{=} \PY{n}{Player}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Alex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} let\PYZsq{}s instantiate a player}
+         
+             \PY{n}{p}\PY{o}{.}\PY{n}{play}\PY{p}{(}\PY{n}{d}\PY{p}{)}  \PY{c+c1}{\PYZsh{} we ask the player to play the game}
+             \PY{c+c1}{\PYZsh{} the rest of the code}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Alex  moved pawns  6
+
+    \end{Verbatim}
+
+    \subsubsection{Inheritance
+(Generalization)}\label{inheritance-generalization}
+
+\textbf{Definition of Inheritance}: Inheritance (or generalization)
+specifies a hierarchy of abstractions, in which a subclass (child)
+inherits structure or behaviour from a superclass (parent). In this
+relationship a subclass extends features of its superclass.
+
+\textbf{Example}: Student is a kind of Person. A Student can inherit
+some features from Person. Moreover, a Student can extend the features
+of a Person. Student is a subclass (or child) and Person is called a
+superclass (or parent).
+
+\textbf{UML}: The picture here shows how an inheritance between two
+classes can be represented in UML.
+
+\textbf{Programming}: We have practiced how to implement classes. How
+can we specify that a Student is a child of Person? The following
+implementation presents how one can implement that Student inherits from
+Person. Moreover, it shows how shared attribtes (first name, last name)
+and shared behaviour (getInfo()) are defined in the parent class. Then,
+the child class, i.e. Student can add more attrbutes to the parent and
+can also extend the behaviour. The keyword \textbf{super()} allows the
+child class to access the attributes, methods of the parent class.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k}{class} \PY{n+nc}{Person}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} let\PYZsq{}s initialize some attributes}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name} \PY{o}{=} \PY{n}{fn}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name} \PY{o}{=} \PY{n}{ln}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{res} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name : }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name}
+                 \PY{k}{return} \PY{n}{res}
+         
+         
+         \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n}{Person}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} See how you can specify the parent of a class}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{)}   \PY{c+c1}{\PYZsh{} We can call parent\PYZsq{}s initializer : super() refers to the parent class}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{student\PYZus{}number} \PY{o}{=} \PY{n}{sn}  \PY{c+c1}{\PYZsh{} Students extends its parent here}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{res} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Student ]:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ; }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{student\PYZus{}number}  \PY{c+c1}{\PYZsh{} Let\PYZsq{}s extend parent\PYZsq{}s behaviour}
+                 \PY{k}{return} \PY{n}{res}
+         
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             
+             \PY{n}{p} \PY{o}{=} \PY{n}{Person}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Peter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Check: an object from the parent}
+             \PY{n}{std} \PY{o}{=} \PY{n}{Student}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dianna}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{King}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{09875673}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}  \PY{c+c1}{\PYZsh{} Check: an object from the student}
+         
+             \PY{c+c1}{\PYZsh{} see how same method behaves differently in two objects}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Check ]:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{p}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Check ]:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{std}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ Check ]: Name : Peter Bell
+[ Check ]: [ Student ]:Name : Dianna King ; 09875673
+
+    \end{Verbatim}
+
+    \textbf{Example}: The picture here shows a Student can be extended
+further. See the coresponding implementation below. Check all the
+details of inheritance carefully.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{k}{class} \PY{n+nc}{Person}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} let\PYZsq{}s initialize some attributes}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name} \PY{o}{=} \PY{n}{fn}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name} \PY{o}{=} \PY{n}{ln}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{res} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Name : }\PY{l+s+s2}{\PYZdq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{first\PYZus{}name}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{last\PYZus{}name}
+                 \PY{k}{return} \PY{n}{res}
+         
+         
+         \PY{k}{class} \PY{n+nc}{Student}\PY{p}{(}\PY{n}{Person}\PY{p}{)}\PY{p}{:}  \PY{c+c1}{\PYZsh{} See how you can specify the parent of a class}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{)}   \PY{c+c1}{\PYZsh{} We can call parent\PYZsq{}s initializer : super() refers to the parent class}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{student\PYZus{}number} \PY{o}{=} \PY{n}{sn}  \PY{c+c1}{\PYZsh{} Students extends its parent here}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{res} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Student ]:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ ; }\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{student\PYZus{}number}  \PY{c+c1}{\PYZsh{} Let\PYZsq{}s extend parent\PYZsq{}s behaviour}
+                 \PY{k}{return} \PY{n}{res}
+         
+         \PY{k}{class} \PY{n+nc}{BachelorStudent}\PY{p}{(}\PY{n}{Student}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}study\PYZus{}duration} \PY{o}{=} \PY{l+m+mi}{4}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Study Duration is:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}study\PYZus{}duration}\PY{p}{)} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s extend parent\PYZsq{}s behaviour}
+         
+         
+         \PY{k}{class} \PY{n+nc}{MasterStudent}\PY{p}{(}\PY{n}{Student}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n}{fn}\PY{p}{,}\PY{n}{ln}\PY{p}{,}\PY{n}{sn}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}study\PYZus{}duration} \PY{o}{=} \PY{l+m+mi}{2}
+         
+             \PY{k}{def} \PY{n+nf}{getInfo}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{return} \PY{n+nb}{super}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ Study Duration is:}\PY{l+s+s1}{\PYZsq{}}\PY{o}{+}\PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}\PYZus{}study\PYZus{}duration}\PY{p}{)} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s extend parent\PYZsq{}s behaviour}
+         
+         
+         \PY{k}{if} \PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}\PYZus{}main\PYZus{}\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
+             \PY{n}{std1} \PY{o}{=} \PY{n}{BachelorStudent}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dianna}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{King}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{09875673}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{std2} \PY{o}{=} \PY{n}{MasterStudent}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Emma}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lee}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{09875345}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Check: check how different pieces of the information is accessible through the hierarchy definition}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Check ]:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{std1}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{[ Check ]:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{std2}\PY{o}{.}\PY{n}{getInfo}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[ Check ]: [ Student ]:Name : Dianna King ; 09875673 Study Duration is:4
+[ Check ]: [ Student ]:Name : Emma Lee ; 09875345 Study Duration is:2
+
+    \end{Verbatim}
+
+    \paragraph{Multiple Inheritance:}\label{multiple-inheritance}
+
+Will come soon ...
+
+    \subsection{Summary}\label{summary}
+
+In this note we have learned: - How one can model and implement
+\emph{lifelong} collaborations between objects: Association. - How one
+can model and implement \emph{hirerachy} of classes: Inheritance. - How
+one can model and implement \emph{temporary} collaborations between
+objects: Dependency.
+
+    \subsection{Practice}\label{practice}
+
+\textbf{Exercise}: A teacher identified with an employee number is also
+a Person. Moreover, we have different categories of teachers: University
+and Hogeschool. Model this hirerachy in UML. Implement corresponding
+code. Show how children in each level extends the attributes and
+behaviour of the parents.
+
+** Exercise: ** Model (in UML) and implement the following problem
+statement: We have two types of vehicles: fueled and unfueled. A bicycle
+is kind of unfueled vehicle. Single-fueled and Alternative-fueled
+vehicles are in the category of fueled vehicle. Define some proper
+attributes and methods for your classes. How do you define a Car in your
+design?
+
+** Exercise: ** Model (in UML) and implement the following problem
+statement: A Woman and a Man are of type of Person identified with date
+of birth of type Date, first and last names. A man can marry to zero or
+one woman. A woman can marry to zero or one man.''
+
+** Exercise: ** A game consists of a board with some cells, two die and
+several pawns. Two players can play the game. Define classes, model them
+in UML. Each player throws two die and move some pawns on the board.
+Design proper attributes, methods and implement some of the methods. For
+example, implement "the player throws the die and based on the numbers,
+move two pawns". Hint: the purpose of this exercise is not to build the
+whole game. Focus on designing properties, behaviours and how different
+objects can collaborate.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
